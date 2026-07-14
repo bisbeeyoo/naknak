@@ -63,6 +63,14 @@
             margin-bottom: 2rem;
         }
 
+        .profile-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
         .profile-section {
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
@@ -294,6 +302,258 @@
             opacity: 0.8;
         }
 
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .gallery-modal-close {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            font-weight: 900;
+            z-index: 101;
+        }
+
+        .gallery-modal-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            background: #333;
+            overflow: hidden;
+            border: 1px solid #555;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .photo-item:hover {
+            border-color: #e5e5e5;
+            transform: scale(1.05);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Photo Detail Modal */
+        .photo-detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 200;
+            padding: 2rem;
+        }
+
+        .photo-detail-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-detail-content {
+            max-width: 900px;
+            width: 100%;
+            color: white;
+        }
+
+        .photo-detail-image-container {
+            position: relative;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .photo-detail-image {
+            max-width: 600px;
+            max-height: 600px;
+            object-fit: contain;
+        }
+
+        .photo-nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 32px;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 900;
+            transition: all 0.2s;
+        }
+
+        .photo-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .photo-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .photo-detail-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            font-weight: 900;
+        }
+
+        .photo-counter {
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 2rem;
+        }
+
+        .comments-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .comments-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .comment-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .comment-input-group input {
+            flex: 1;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 12px;
+        }
+
+        .comment-input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .comment-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 12px;
+            margin-bottom: 1rem;
+            resize: vertical;
+            min-height: 60px;
+            font-family: inherit;
+        }
+
+        .comment-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .comment-submit-btn {
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .comment-submit-btn:hover {
+            opacity: 0.8;
+        }
+
+        .comments-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .comment-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: #aaa;
+        }
+
+        .comment-text {
+            color: #e5e5e5;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .comment-delete {
+            font-size: 10px;
+            color: #999;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .comment-delete:hover {
+            color: #f00;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -303,7 +563,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            z-index: 100;
+            z-index: 300;
         }
 
         .modal.active {
@@ -316,7 +576,7 @@
         .modal-content {
             background: white;
             width: 90%;
-            max-width: 1000px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             padding: 2rem;
@@ -331,87 +591,6 @@
         }
 
         .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            font-weight: 900;
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 1rem;
-        }
-
-        .photo-item {
-            aspect-ratio: 1;
-            background: #f5f5f5;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .photo-item {
-                background: #1a1a1a;
-                border-color: #333;
-            }
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Admin Panel */
-        .admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 200;
-        }
-
-        .admin-panel.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .admin-content {
-            background: white;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem;
-            position: relative;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .admin-content {
-                background: #0a0a0a;
-                color: #e5e5e5;
-            }
-        }
-
-        .admin-close {
             position: absolute;
             top: 1rem;
             right: 1rem;
@@ -516,7 +695,7 @@
         }
 
         .trips-list {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
             border: 1px solid #e0e0e0;
             margin-top: 1rem;
@@ -533,13 +712,41 @@
             border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         @media (prefers-color-scheme: dark) {
             .trip-item {
                 border-bottom-color: #333;
             }
+        }
+
+        .trip-info {
+            flex: 1;
+        }
+
+        .trip-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .trip-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .trip-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .trip-actions .btn {
+            padding: 6px 12px;
+            margin: 0;
+            font-size: 10px;
         }
 
         .empty-state {
@@ -572,18 +779,172 @@
             }
         }
 
+        /* Photo List in Admin */
+        .photos-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .photos-list {
+                background: #1a1a1a;
+            }
+        }
+
+        .photo-admin-item {
+            position: relative;
+            aspect-ratio: 1;
+            border: 2px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .photo-admin-item {
+                border-color: #333;
+            }
+        }
+
+        .photo-admin-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-admin-item.cover {
+            border: 2px solid #1a1a1a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .photo-admin-item.cover {
+                border-color: #e5e5e5;
+            }
+        }
+
+        .photo-cover-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #1a1a1a;
+            color: white;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .photo-admin-item-btn {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 2px;
+            font-size: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
             .sidebar {
                 width: 100%;
                 height: auto;
                 border-right: none;
                 border-bottom: 2px solid #1a1a1a;
-                position: relative;
-                padding: 1.5rem;
+                position: sticky;
+                top: 0;
+                z-index: 50;
+                padding: 1rem 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .sidebar {
+                    border-bottom-color: #333;
+                }
+            }
+
+            .logo-container {
+                margin-bottom: 0;
+                flex: 1;
+                max-width: 120px;
+            }
+
+            .logo-image {
+                margin-bottom: 0.5rem;
+            }
+
+            .logo-text {
+                font-size: 14px;
+                margin-bottom: 0;
+            }
+
+            .profile-toggle {
+                display: block;
+                font-size: 18px;
+                margin-left: 1rem;
+            }
+
+            .profile-section {
+                display: none;
+            }
+
+            .profile-section.active {
+                display: block;
+            }
+
+            .sidebar-btn {
+                margin-top: 0;
+                margin-left: 1rem;
+                width: auto;
+                padding: 8px 12px;
+                font-size: 11px;
             }
 
             .main {
                 margin-left: 0;
+                padding: 1rem;
+            }
+
+            .header {
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+            }
+
+            .header-title {
+                font-size: 20px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 0.75rem;
+            }
+
+            .photo-detail-image-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .photo-nav-btn {
+                padding: 0.75rem;
+                font-size: 24px;
+            }
+
+            .photo-detail-image {
+                max-width: 100%;
+                max-height: 400px;
             }
         }
     </style>
@@ -596,19 +957,22 @@
             <div class="logo-text">NAK NAK</div>
         </div>
 
-        <div class="profile-section">
-            <div class="profile-label">이름</div>
-            <div class="profile-value" id="profileName">낙낙</div>
-            
-            <div class="profile-label">소개</div>
-            <div class="profile-value" id="profileBio" style="font-size: 12px; white-space: pre-wrap;">영어 교사 & 여행 기록자</div>
+        <div id="profileContent">
+            <div class="profile-section">
+                <div class="profile-label">이름</div>
+                <div class="profile-value" id="profileName">낙낙</div>
+                
+                <div class="profile-label">소개</div>
+                <div class="profile-value" id="profileBio" style="font-size: 12px; white-space: pre-wrap;">영어 교사 & 여행 기록자</div>
+            </div>
+
+            <div class="profile-section">
+                <div class="profile-label">관심사</div>
+                <div class="interests-tags" id="interestsTags"></div>
+            </div>
         </div>
 
-        <div class="profile-section">
-            <div class="profile-label">관심사</div>
-            <div class="interests-tags" id="interestsTags"></div>
-        </div>
-
+        <div class="profile-toggle" id="profileToggle">▼</div>
         <button class="sidebar-btn" onclick="openAdmin()">설정</button>
     </div>
 
@@ -627,19 +991,42 @@
         </div>
     </div>
 
-    <!-- Gallery Modal -->
-    <div class="modal" id="galleryModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeGallery()">✕</button>
-            <div class="modal-title" id="modalTitle">여행 제목</div>
-            <div class="photo-grid" id="photoGrid"></div>
+    <!-- Gallery Modal (Trip Photos) -->
+    <div class="gallery-modal" id="galleryModal">
+        <button class="gallery-modal-close" onclick="closeGallery()">✕</button>
+        <div class="gallery-modal-title" id="galleryModalTitle">여행 제목</div>
+        <div class="photo-grid" id="photoGrid"></div>
+    </div>
+
+    <!-- Photo Detail Modal -->
+    <div class="photo-detail-modal" id="photoDetailModal">
+        <button class="photo-detail-close" onclick="closePhotoDetail()">✕</button>
+        <div class="photo-detail-content">
+            <div class="photo-detail-image-container">
+                <button class="photo-nav-btn" onclick="prevPhoto()" id="prevBtn">‹</button>
+                <img src="" alt="Photo" class="photo-detail-image" id="photoDetailImage">
+                <button class="photo-nav-btn" onclick="nextPhoto()" id="nextBtn">›</button>
+            </div>
+            <div class="photo-counter" id="photoCounter"></div>
+
+            <div class="comments-section">
+                <div class="comments-title">댓글</div>
+                
+                <div class="comment-input-group">
+                    <input type="text" id="commentName" placeholder="이름" maxlength="20">
+                </div>
+                <textarea id="commentText" placeholder="댓글을 작성해주세요..." maxlength="500"></textarea>
+                <button class="comment-submit-btn" onclick="addComment()">댓글 작성</button>
+
+                <div class="comments-list" id="commentsList"></div>
+            </div>
         </div>
     </div>
 
     <!-- Admin Panel -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-content">
-            <button class="admin-close" onclick="closeAdmin()">✕</button>
+    <div class="modal" id="adminPanel">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAdmin()">✕</button>
             <div class="admin-title">관리자 패널</div>
 
             <!-- Profile Settings -->
@@ -693,12 +1080,14 @@
                 interests: ['photography', 'travel', 'teaching']
             },
             trips: [
-                { id: 1, name: '일본 여행', date: 'Spring 2024', photos: [], coverPhoto: null, deleted: false },
-                { id: 2, name: '제주도', date: 'Summer 2024', photos: [], coverPhoto: null, deleted: false }
+                { id: 1, name: '일본 여행', date: 'Spring 2024', photos: [], coverPhotoIndex: 0, deleted: false, comments: {} },
+                { id: 2, name: '제주도', date: 'Summer 2024', photos: [], coverPhotoIndex: 0, deleted: false, comments: {} }
             ]
         };
 
         let data = JSON.parse(localStorage.getItem('portfolioData')) || JSON.parse(JSON.stringify(initData));
+        let currentTripId = null;
+        let currentPhotoIndex = 0;
 
         function saveData() {
             localStorage.setItem('portfolioData', JSON.stringify(data));
@@ -728,8 +1117,9 @@
                 name: name,
                 date: today,
                 photos: [],
-                coverPhoto: null,
-                deleted: false
+                coverPhotoIndex: 0,
+                deleted: false,
+                comments: {}
             });
 
             document.getElementById('newTripName').value = '';
@@ -749,13 +1139,10 @@
             if (!trip) return;
 
             let uploadedCount = 0;
-            Array.from(files).forEach((file, idx) => {
+            Array.from(files).forEach((file) => {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     trip.photos.push(e.target.result);
-                    if (!trip.coverPhoto && idx === 0) {
-                        trip.coverPhoto = e.target.result;
-                    }
                     uploadedCount++;
                     if (uploadedCount === Array.from(files).length) {
                         saveData();
@@ -765,6 +1152,26 @@
                 };
                 reader.readAsDataURL(file);
             });
+        }
+
+        function setCoverPhoto(tripId, photoIndex) {
+            const trip = data.trips.find(t => t.id === tripId);
+            if (trip) {
+                trip.coverPhotoIndex = photoIndex;
+                saveData();
+            }
+        }
+
+        function deletePhoto(tripId, photoIndex) {
+            const trip = data.trips.find(t => t.id === tripId);
+            if (trip) {
+                trip.photos.splice(photoIndex, 1);
+                if (trip.coverPhotoIndex >= trip.photos.length) {
+                    trip.coverPhotoIndex = Math.max(0, trip.photos.length - 1);
+                }
+                saveData();
+                updateTripPhotos(tripId);
+            }
         }
 
         function toggleDeleteTrip(tripId) {
@@ -791,20 +1198,23 @@
                 emptyState.style.display = 'block';
             } else {
                 emptyState.style.display = 'none';
-                gallery.innerHTML = activeTrips.map(trip => `
-                    <div class="gallery-item" onclick="openGallery(${trip.id})">
-                        ${trip.coverPhoto ? 
-                            `<img src="${trip.coverPhoto}" alt="${trip.name}">` : 
-                            `<div class="gallery-placeholder">📸</div>`
-                        }
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <div class="gallery-title">${trip.name}</div>
-                                <div class="gallery-count">${trip.date} • ${trip.photos.length}장</div>
+                gallery.innerHTML = activeTrips.map(trip => {
+                    const coverPhoto = trip.photos[trip.coverPhotoIndex];
+                    return `
+                        <div class="gallery-item" onclick="openGallery(${trip.id})">
+                            ${coverPhoto ? 
+                                `<img src="${coverPhoto}" alt="${trip.name}">` : 
+                                `<div class="gallery-placeholder">📸</div>`
+                            }
+                            <div class="gallery-overlay">
+                                <div class="gallery-info">
+                                    <div class="gallery-title">${trip.name}</div>
+                                    <div class="gallery-count">${trip.date} • ${trip.photos.length}장</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
 
             updateTripsList();
@@ -819,13 +1229,18 @@
             const list = document.getElementById('tripsList');
             list.innerHTML = data.trips.map(trip => `
                 <div class="trip-item">
-                    <div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">${trip.name}</div>
-                        <div style="font-size: 12px; color: #999;">${trip.date} • ${trip.photos.length}장 ${trip.deleted ? '🗑️' : ''}</div>
+                    <div class="trip-info">
+                        <div class="trip-name">${trip.name}</div>
+                        <div class="trip-date">${trip.date} • ${trip.photos.length}장 ${trip.deleted ? '🗑️' : ''}</div>
                     </div>
-                    <button class="btn secondary" style="padding: 6px 12px; margin: 0;" onclick="toggleDeleteTrip(${trip.id})">
-                        ${trip.deleted ? '복원' : '삭제'}
-                    </button>
+                    <div class="trip-actions">
+                        <button class="btn secondary" onclick="toggleDeleteTrip(${trip.id})">
+                            ${trip.deleted ? '복원' : '삭제'}
+                        </button>
+                        <button class="btn secondary" onclick="managePhotos(${trip.id})">
+                            사진관리
+                        </button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -837,15 +1252,37 @@
                 activeTrips.map(trip => `<option value="${trip.id}">${trip.name}</option>`).join('');
         }
 
-        function openGallery(tripId) {
+        function managePhotos(tripId) {
             const trip = data.trips.find(t => t.id === tripId);
             if (!trip) return;
 
-            document.getElementById('modalTitle').textContent = trip.name;
+            const photosHtml = trip.photos.map((photo, idx) => `
+                <div class="photo-admin-item ${idx === trip.coverPhotoIndex ? 'cover' : ''}">
+                    <img src="${photo}" alt="photo">
+                    ${idx === trip.coverPhotoIndex ? '<div class="photo-cover-badge">대표</div>' : ''}
+                    <button class="photo-admin-item-btn" onclick="setCoverPhoto(${tripId}, ${idx}); render();">대표사진</button>
+                </div>
+            `).join('');
+
+            alert(`${trip.name}의 사진 관리:\n- 대표사진 버튼으로 대표사진을 선택할 수 있습니다.\n현재 ${trip.photos.length}장의 사진이 있습니다.`);
+        }
+
+        function updateTripPhotos(tripId) {
+            managePhotos(tripId);
+        }
+
+        function openGallery(tripId) {
+            currentTripId = tripId;
+            const trip = data.trips.find(t => t.id === tripId);
+            if (!trip) return;
+
+            document.getElementById('galleryModalTitle').textContent = trip.name;
             document.getElementById('photoGrid').innerHTML = trip.photos.length === 0 ?
                 '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #999;">아직 사진이 없어요</div>' :
-                trip.photos.map(photo => `
-                    <div class="photo-item"><img src="${photo}" alt="photo"></div>
+                trip.photos.map((photo, idx) => `
+                    <div class="photo-item" onclick="openPhotoDetail(${tripId}, ${idx})">
+                        <img src="${photo}" alt="photo">
+                    </div>
                 `).join('');
 
             document.getElementById('galleryModal').classList.add('active');
@@ -853,6 +1290,125 @@
 
         function closeGallery() {
             document.getElementById('galleryModal').classList.remove('active');
+        }
+
+        function openPhotoDetail(tripId, photoIndex) {
+            currentTripId = tripId;
+            currentPhotoIndex = photoIndex;
+            const trip = data.trips.find(t => t.id === tripId);
+            if (!trip || !trip.photos[photoIndex]) return;
+
+            document.getElementById('photoDetailImage').src = trip.photos[photoIndex];
+            updatePhotoCounter();
+            loadComments();
+            updateNavButtons();
+
+            document.getElementById('photoDetailModal').classList.add('active');
+        }
+
+        function closePhotoDetail() {
+            document.getElementById('photoDetailModal').classList.remove('active');
+        }
+
+        function updatePhotoCounter() {
+            const trip = data.trips.find(t => t.id === currentTripId);
+            if (trip) {
+                document.getElementById('photoCounter').textContent = `${currentPhotoIndex + 1} / ${trip.photos.length}`;
+            }
+        }
+
+        function updateNavButtons() {
+            const trip = data.trips.find(t => t.id === currentTripId);
+            if (!trip) return;
+            
+            document.getElementById('prevBtn').disabled = currentPhotoIndex === 0;
+            document.getElementById('nextBtn').disabled = currentPhotoIndex === trip.photos.length - 1;
+        }
+
+        function prevPhoto() {
+            if (currentPhotoIndex > 0) {
+                currentPhotoIndex--;
+                const trip = data.trips.find(t => t.id === currentTripId);
+                document.getElementById('photoDetailImage').src = trip.photos[currentPhotoIndex];
+                updatePhotoCounter();
+                loadComments();
+                updateNavButtons();
+            }
+        }
+
+        function nextPhoto() {
+            const trip = data.trips.find(t => t.id === currentTripId);
+            if (currentPhotoIndex < trip.photos.length - 1) {
+                currentPhotoIndex++;
+                document.getElementById('photoDetailImage').src = trip.photos[currentPhotoIndex];
+                updatePhotoCounter();
+                loadComments();
+                updateNavButtons();
+            }
+        }
+
+        function addComment() {
+            const name = document.getElementById('commentName').value.trim();
+            const text = document.getElementById('commentText').value.trim();
+
+            if (!name || !text) {
+                alert('이름과 댓글을 입력해주세요');
+                return;
+            }
+
+            const trip = data.trips.find(t => t.id === currentTripId);
+            if (!trip) return;
+
+            const photoKey = `photo_${currentPhotoIndex}`;
+            if (!trip.comments[photoKey]) {
+                trip.comments[photoKey] = [];
+            }
+
+            trip.comments[photoKey].push({
+                id: Date.now(),
+                name: name,
+                text: text,
+                date: new Date().toLocaleString('ko-KR')
+            });
+
+            saveData();
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentText').value = '';
+            loadComments();
+        }
+
+        function deleteComment(commentId) {
+            const trip = data.trips.find(t => t.id === currentTripId);
+            if (!trip) return;
+
+            const photoKey = `photo_${currentPhotoIndex}`;
+            if (trip.comments[photoKey]) {
+                trip.comments[photoKey] = trip.comments[photoKey].filter(c => c.id !== commentId);
+                saveData();
+                loadComments();
+            }
+        }
+
+        function loadComments() {
+            const trip = data.trips.find(t => t.id === currentTripId);
+            if (!trip) return;
+
+            const photoKey = `photo_${currentPhotoIndex}`;
+            const comments = trip.comments[photoKey] || [];
+            const commentsList = document.getElementById('commentsList');
+
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<div style="text-align: center; color: #999; padding: 1rem;">아직 댓글이 없어요</div>';
+                return;
+            }
+
+            commentsList.innerHTML = comments.map(comment => `
+                <div class="comment-item">
+                    <div class="comment-author">${comment.name}</div>
+                    <div class="comment-text">${comment.text.replace(/\n/g, '<br>')}</div>
+                    <div class="comment-delete" onclick="deleteComment(${comment.id})">삭제</div>
+                </div>
+            `).join('');
         }
 
         function openAdmin() {
@@ -873,8 +1429,20 @@
             }
         }
 
+        // Mobile Profile Toggle
+        document.getElementById('profileToggle').addEventListener('click', () => {
+            const content = document.getElementById('profileContent');
+            content.classList.toggle('active');
+            const toggle = document.getElementById('profileToggle');
+            toggle.textContent = content.classList.contains('active') ? '▲' : '▼';
+        });
+
         document.getElementById('galleryModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('galleryModal')) closeGallery();
+        });
+
+        document.getElementById('photoDetailModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('photoDetailModal')) closePhotoDetail();
         });
 
         document.getElementById('adminPanel').addEventListener('click', (e) => {
