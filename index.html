@@ -350,6 +350,7 @@
             gap: 1rem;
             max-width: 800px;
             margin-bottom: 2rem;
+            width: 100%;
         }
 
         .photo-item {
@@ -382,13 +383,15 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.98);
             z-index: 200;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            overflow-y: auto;
         }
 
         .photo-detail-modal.active {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .photo-detail-content {
@@ -403,12 +406,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
         }
 
         .photo-detail-image {
-            max-width: 600px;
-            max-height: 600px;
+            max-width: 100%;
+            max-height: 500px;
             object-fit: contain;
         }
 
@@ -468,12 +471,12 @@
 
         .comment-input-group {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .comment-input-group input {
-            flex: 1;
             padding: 0.75rem;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -521,6 +524,7 @@
         .comments-list {
             max-height: 300px;
             overflow-y: auto;
+            margin-top: 1rem;
         }
 
         .comment-item {
@@ -543,17 +547,6 @@
             word-break: break-word;
         }
 
-        .comment-delete {
-            font-size: 10px;
-            color: #999;
-            cursor: pointer;
-            margin-top: 0.5rem;
-        }
-
-        .comment-delete:hover {
-            color: #f00;
-        }
-
         /* Modal */
         .modal {
             display: none;
@@ -564,11 +557,12 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             z-index: 300;
+            overflow-y: auto;
         }
 
         .modal.active {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             padding: 1rem;
         }
@@ -581,6 +575,7 @@
             overflow-y: auto;
             padding: 2rem;
             position: relative;
+            margin-top: 2rem;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -779,75 +774,15 @@
             }
         }
 
-        /* Photo List in Admin */
-        .photos-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        .upload-buttons {
+            display: flex;
             gap: 0.5rem;
             margin-top: 1rem;
-            padding: 1rem;
-            background: #f5f5f5;
-            border-radius: 4px;
         }
 
-        @media (prefers-color-scheme: dark) {
-            .photos-list {
-                background: #1a1a1a;
-            }
-        }
-
-        .photo-admin-item {
-            position: relative;
-            aspect-ratio: 1;
-            border: 2px solid #e0e0e0;
-            overflow: hidden;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .photo-admin-item {
-                border-color: #333;
-            }
-        }
-
-        .photo-admin-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-admin-item.cover {
-            border: 2px solid #1a1a1a;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .photo-admin-item.cover {
-                border-color: #e5e5e5;
-            }
-        }
-
-        .photo-cover-badge {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            background: #1a1a1a;
-            color: white;
-            padding: 2px 6px;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .photo-admin-item-btn {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            padding: 2px;
-            font-size: 9px;
-            cursor: pointer;
-            font-weight: 700;
-            text-transform: uppercase;
+        .upload-buttons .btn {
+            flex: 1;
+            margin-bottom: 0;
         }
 
         /* Mobile Responsive */
@@ -864,53 +799,65 @@
                 position: sticky;
                 top: 0;
                 z-index: 50;
-                padding: 1rem 1.5rem;
+                padding: 1rem;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: space-between;
-            }
-
-            @media (prefers-color-scheme: dark) {
-                .sidebar {
-                    border-bottom-color: #333;
-                }
             }
 
             .logo-container {
                 margin-bottom: 0;
-                flex: 1;
-                max-width: 120px;
+                flex-shrink: 0;
+                max-width: 80px;
             }
 
             .logo-image {
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.25rem;
             }
 
             .logo-text {
-                font-size: 14px;
+                font-size: 12px;
                 margin-bottom: 0;
             }
 
             .profile-toggle {
                 display: block;
-                font-size: 18px;
+                flex-shrink: 0;
                 margin-left: 1rem;
             }
 
-            .profile-section {
+            #profileContent {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #fff;
+                border-bottom: 2px solid #1a1a1a;
+                padding: 1rem;
+                width: 100%;
+                max-height: 300px;
+                overflow-y: auto;
             }
 
-            .profile-section.active {
+            @media (prefers-color-scheme: dark) {
+                #profileContent {
+                    background: #0a0a0a;
+                    border-bottom-color: #333;
+                }
+            }
+
+            #profileContent.active {
                 display: block;
             }
 
             .sidebar-btn {
                 margin-top: 0;
-                margin-left: 1rem;
+                margin-left: auto;
                 width: auto;
                 padding: 8px 12px;
                 font-size: 11px;
+                flex-shrink: 0;
             }
 
             .main {
@@ -934,7 +881,7 @@
 
             .photo-detail-image-container {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.5rem;
             }
 
             .photo-nav-btn {
@@ -946,6 +893,15 @@
                 max-width: 100%;
                 max-height: 400px;
             }
+
+            .photo-detail-modal {
+                padding: 1rem;
+            }
+
+            .photo-detail-close {
+                top: 1rem;
+                right: 1rem;
+            }
         }
     </style>
 </head>
@@ -956,6 +912,9 @@
             <img src="logo.png" alt="NAK NAK Logo" class="logo-image">
             <div class="logo-text">NAK NAK</div>
         </div>
+
+        <div class="profile-toggle" id="profileToggle">▼</div>
+        <button class="sidebar-btn" onclick="openAdmin()">설정</button>
 
         <div id="profileContent">
             <div class="profile-section">
@@ -971,9 +930,6 @@
                 <div class="interests-tags" id="interestsTags"></div>
             </div>
         </div>
-
-        <div class="profile-toggle" id="profileToggle">▼</div>
-        <button class="sidebar-btn" onclick="openAdmin()">설정</button>
     </div>
 
     <!-- Main Content -->
@@ -1014,8 +970,8 @@
                 
                 <div class="comment-input-group">
                     <input type="text" id="commentName" placeholder="이름" maxlength="20">
+                    <textarea id="commentText" placeholder="댓글을 작성해주세요..." maxlength="500"></textarea>
                 </div>
-                <textarea id="commentText" placeholder="댓글을 작성해주세요..." maxlength="500"></textarea>
                 <button class="comment-submit-btn" onclick="addComment()">댓글 작성</button>
 
                 <div class="comments-list" id="commentsList"></div>
@@ -1061,8 +1017,13 @@
                 <select id="tripSelect" style="margin-bottom: 1rem;">
                     <option value="">여행 선택</option>
                 </select>
-                <input type="file" id="photoInput" multiple accept="image/*" onchange="handlePhotoUpload()">
-                <label for="photoInput" class="file-btn">사진 선택</label>
+                <input type="file" id="photoInput" multiple accept="image/*">
+                <label for="photoInput" class="file-btn">사진 추가하기</label>
+                <div class="upload-buttons">
+                    <button class="btn" onclick="handlePhotoUpload()">업로드</button>
+                    <button class="btn secondary" onclick="clearPhotoInput()">취소</button>
+                </div>
+                <div id="selectedPhotoCount" style="font-size: 12px; color: #999; margin-top: 0.5rem;"></div>
             </div>
 
             <!-- Settings -->
@@ -1135,6 +1096,11 @@
                 return;
             }
 
+            if (files.length === 0) {
+                alert('사진을 선택해주세요');
+                return;
+            }
+
             const trip = data.trips.find(t => t.id === tripId);
             if (!trip) return;
 
@@ -1146,7 +1112,7 @@
                     uploadedCount++;
                     if (uploadedCount === Array.from(files).length) {
                         saveData();
-                        document.getElementById('photoInput').value = '';
+                        clearPhotoInput();
                         alert('사진이 업로드되었습니다!');
                     }
                 };
@@ -1154,23 +1120,16 @@
             });
         }
 
+        function clearPhotoInput() {
+            document.getElementById('photoInput').value = '';
+            document.getElementById('selectedPhotoCount').textContent = '';
+        }
+
         function setCoverPhoto(tripId, photoIndex) {
             const trip = data.trips.find(t => t.id === tripId);
             if (trip) {
                 trip.coverPhotoIndex = photoIndex;
                 saveData();
-            }
-        }
-
-        function deletePhoto(tripId, photoIndex) {
-            const trip = data.trips.find(t => t.id === tripId);
-            if (trip) {
-                trip.photos.splice(photoIndex, 1);
-                if (trip.coverPhotoIndex >= trip.photos.length) {
-                    trip.coverPhotoIndex = Math.max(0, trip.photos.length - 1);
-                }
-                saveData();
-                updateTripPhotos(tripId);
             }
         }
 
@@ -1237,9 +1196,6 @@
                         <button class="btn secondary" onclick="toggleDeleteTrip(${trip.id})">
                             ${trip.deleted ? '복원' : '삭제'}
                         </button>
-                        <button class="btn secondary" onclick="managePhotos(${trip.id})">
-                            사진관리
-                        </button>
                     </div>
                 </div>
             `).join('');
@@ -1250,25 +1206,6 @@
             const activeTrips = data.trips.filter(t => !t.deleted);
             select.innerHTML = '<option value="">여행 선택</option>' +
                 activeTrips.map(trip => `<option value="${trip.id}">${trip.name}</option>`).join('');
-        }
-
-        function managePhotos(tripId) {
-            const trip = data.trips.find(t => t.id === tripId);
-            if (!trip) return;
-
-            const photosHtml = trip.photos.map((photo, idx) => `
-                <div class="photo-admin-item ${idx === trip.coverPhotoIndex ? 'cover' : ''}">
-                    <img src="${photo}" alt="photo">
-                    ${idx === trip.coverPhotoIndex ? '<div class="photo-cover-badge">대표</div>' : ''}
-                    <button class="photo-admin-item-btn" onclick="setCoverPhoto(${tripId}, ${idx}); render();">대표사진</button>
-                </div>
-            `).join('');
-
-            alert(`${trip.name}의 사진 관리:\n- 대표사진 버튼으로 대표사진을 선택할 수 있습니다.\n현재 ${trip.photos.length}장의 사진이 있습니다.`);
-        }
-
-        function updateTripPhotos(tripId) {
-            managePhotos(tripId);
         }
 
         function openGallery(tripId) {
@@ -1367,8 +1304,7 @@
             trip.comments[photoKey].push({
                 id: Date.now(),
                 name: name,
-                text: text,
-                date: new Date().toLocaleString('ko-KR')
+                text: text
             });
 
             saveData();
@@ -1406,7 +1342,6 @@
                 <div class="comment-item">
                     <div class="comment-author">${comment.name}</div>
                     <div class="comment-text">${comment.text.replace(/\n/g, '<br>')}</div>
-                    <div class="comment-delete" onclick="deleteComment(${comment.id})">삭제</div>
                 </div>
             `).join('');
         }
@@ -1428,6 +1363,13 @@
                 alert('모든 데이터가 삭제되었습니다.');
             }
         }
+
+        // Photo Input Change Tracker
+        document.getElementById('photoInput').addEventListener('change', () => {
+            const fileCount = document.getElementById('photoInput').files.length;
+            const countText = fileCount > 0 ? `${fileCount}개 선택됨` : '';
+            document.getElementById('selectedPhotoCount').textContent = countText;
+        });
 
         // Mobile Profile Toggle
         document.getElementById('profileToggle').addEventListener('click', () => {
