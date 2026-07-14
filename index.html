@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAK NAK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+            display: flex;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0a0a0a;
+                color: #e5e5e5;
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            padding: 2rem 1.5rem;
+            border-right: 2px solid #1a1a1a;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            background: #fff;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .sidebar {
+                background: #0a0a0a;
+                border-right-color: #333;
+            }
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            max-width: 200px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .profile-section {
+                border-bottom-color: #333;
+            }
+        }
+
+        .profile-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .profile-value {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .interests-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .interest-tag {
+            background: #1a1a1a;
+            color: white;
+            padding: 4px 10px;
+            font-size: 11px;
+            border-radius: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .interest-tag {
+                background: #e5e5e5;
+                color: #0a0a0a;
+            }
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .sidebar-btn {
+                background: #e5e5e5;
+                color: #0a0a0a;
+            }
+        }
+
+        .sidebar-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .header {
+                border-bottom-color: #333;
+            }
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .header-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid #1a1a1a;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .header-btn {
+                border-color: #e5e5e5;
+                color: #e5e5e5;
+            }
+        }
+
+        .header-btn:hover {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .header-btn:hover {
+                background: #e5e5e5;
+                color: #0a0a0a;
+            }
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: #f5f5f5;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .gallery-item {
+                background: #1a1a1a;
+                border-color: #333;
+            }
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: #1a1a1a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .gallery-item:hover {
+                border-color: #e5e5e5;
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 900;
+            color: #e0e0e0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .gallery-placeholder {
+                color: #333;
+            }
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .gallery-info {
+            color: white;
+        }
+
+        .gallery-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .gallery-count {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .modal-content {
+                background: #0a0a0a;
+                color: #e5e5e5;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            font-weight: 900;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            background: #f5f5f5;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .photo-item {
+                background: #1a1a1a;
+                border-color: #333;
+            }
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 200;
+        }
+
+        .admin-panel.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .admin-content {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .admin-content {
+                background: #0a0a0a;
+                color: #e5e5e5;
+            }
+        }
+
+        .admin-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            font-weight: 900;
+        }
+
+        .admin-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .admin-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .admin-section {
+                border-bottom-color: #333;
+            }
+        }
+
+        .admin-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            input[type="text"],
+            textarea,
+            select {
+                background: #1a1a1a;
+                border-color: #333;
+                color: #e5e5e5;
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .btn {
+                background: #e5e5e5;
+                color: #0a0a0a;
+            }
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn.secondary {
+            background: transparent;
+            border: 1px solid #e0e0e0;
+            color: #1a1a1a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .btn.secondary {
+                border-color: #333;
+                color: #e5e5e5;
+            }
+        }
+
+        .trips-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            margin-top: 1rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .trips-list {
+                border-color: #333;
+            }
+        }
+
+        .trip-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .trip-item {
+                border-bottom-color: #333;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .file-btn {
+                background: #e5e5e5;
+                color: #0a0a0a;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 2px solid #1a1a1a;
+                position: relative;
+                padding: 1.5rem;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="logo.png" alt="NAK NAK Logo" class="logo-image">
+            <div class="logo-text">NAK NAK</div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-label">이름</div>
+            <div class="profile-value" id="profileName">낙낙</div>
+            
+            <div class="profile-label">소개</div>
+            <div class="profile-value" id="profileBio" style="font-size: 12px; white-space: pre-wrap;">영어 교사 & 여행 기록자</div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-label">관심사</div>
+            <div class="interests-tags" id="interestsTags"></div>
+        </div>
+
+        <button class="sidebar-btn" onclick="openAdmin()">설정</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="header">
+            <h1 class="header-title">갤러리</h1>
+            <button class="header-btn" onclick="openAdmin()">관리</button>
+        </div>
+
+        <div class="gallery" id="gallery"></div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <p style="margin-bottom: 1rem;">아직 여행이 없어요</p>
+            <p style="font-size: 12px; color: #bbb;">관리에서 새로운 여행을 추가해보세요!</p>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="modal" id="galleryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeGallery()">✕</button>
+            <div class="modal-title" id="modalTitle">여행 제목</div>
+            <div class="photo-grid" id="photoGrid"></div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-content">
+            <button class="admin-close" onclick="closeAdmin()">✕</button>
+            <div class="admin-title">관리자 패널</div>
+
+            <!-- Profile Settings -->
+            <div class="admin-section">
+                <div class="admin-label">이름</div>
+                <input type="text" id="inputName" placeholder="낙낙">
+                
+                <div class="admin-label">소개</div>
+                <textarea id="inputBio" placeholder="영어 교사 & 여행 기록자"></textarea>
+                
+                <div class="admin-label">관심사 (쉼표로 구분)</div>
+                <input type="text" id="inputInterests" placeholder="photography, travel, coffee">
+                
+                <button class="btn" onclick="saveProfile()">프로필 저장</button>
+            </div>
+
+            <!-- Trips Management -->
+            <div class="admin-section">
+                <div class="admin-label">새 여행 추가</div>
+                <input type="text" id="newTripName" placeholder="여행 이름 (예: 일본 여행)">
+                <button class="btn" onclick="addTrip()">여행 추가</button>
+
+                <div style="margin-top: 1.5rem;">
+                    <div class="admin-label">여행 목록</div>
+                    <div class="trips-list" id="tripsList"></div>
+                </div>
+            </div>
+
+            <!-- Photo Upload -->
+            <div class="admin-section">
+                <div class="admin-label">사진 업로드</div>
+                <select id="tripSelect" style="margin-bottom: 1rem;">
+                    <option value="">여행 선택</option>
+                </select>
+                <input type="file" id="photoInput" multiple accept="image/*" onchange="handlePhotoUpload()">
+                <label for="photoInput" class="file-btn">사진 선택</label>
+            </div>
+
+            <!-- Settings -->
+            <div class="admin-section">
+                <button class="btn secondary" onclick="resetData()">모든 데이터 삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const initData = {
+            profile: {
+                name: '낙낙',
+                bio: '영어 교사 & 여행 기록자',
+                interests: ['photography', 'travel', 'teaching']
+            },
+            trips: [
+                { id: 1, name: '일본 여행', date: 'Spring 2024', photos: [], coverPhoto: null, deleted: false },
+                { id: 2, name: '제주도', date: 'Summer 2024', photos: [], coverPhoto: null, deleted: false }
+            ]
+        };
+
+        let data = JSON.parse(localStorage.getItem('portfolioData')) || JSON.parse(JSON.stringify(initData));
+
+        function saveData() {
+            localStorage.setItem('portfolioData', JSON.stringify(data));
+            render();
+        }
+
+        function saveProfile() {
+            data.profile.name = document.getElementById('inputName').value || '낙낙';
+            data.profile.bio = document.getElementById('inputBio').value || '영어 교사 & 여행 기록자';
+            data.profile.interests = document.getElementById('inputInterests').value
+                .split(',')
+                .map(i => i.trim())
+                .filter(i => i);
+            saveData();
+            alert('프로필이 저장되었습니다!');
+        }
+
+        function addTrip() {
+            const name = document.getElementById('newTripName').value.trim();
+            if (!name) return;
+
+            const newId = Math.max(...data.trips.map(t => t.id), 0) + 1;
+            const today = new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' });
+
+            data.trips.push({
+                id: newId,
+                name: name,
+                date: today,
+                photos: [],
+                coverPhoto: null,
+                deleted: false
+            });
+
+            document.getElementById('newTripName').value = '';
+            saveData();
+        }
+
+        function handlePhotoUpload() {
+            const files = document.getElementById('photoInput').files;
+            const tripId = parseInt(document.getElementById('tripSelect').value);
+
+            if (!tripId) {
+                alert('여행을 선택해주세요');
+                return;
+            }
+
+            const trip = data.trips.find(t => t.id === tripId);
+            if (!trip) return;
+
+            let uploadedCount = 0;
+            Array.from(files).forEach((file, idx) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    trip.photos.push(e.target.result);
+                    if (!trip.coverPhoto && idx === 0) {
+                        trip.coverPhoto = e.target.result;
+                    }
+                    uploadedCount++;
+                    if (uploadedCount === Array.from(files).length) {
+                        saveData();
+                        document.getElementById('photoInput').value = '';
+                        alert('사진이 업로드되었습니다!');
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function toggleDeleteTrip(tripId) {
+            const trip = data.trips.find(t => t.id === tripId);
+            if (trip) {
+                trip.deleted = !trip.deleted;
+                saveData();
+            }
+        }
+
+        function render() {
+            document.getElementById('profileName').textContent = data.profile.name;
+            document.getElementById('profileBio').textContent = data.profile.bio;
+            document.getElementById('interestsTags').innerHTML = data.profile.interests
+                .map(interest => `<div class="interest-tag">${interest}</div>`)
+                .join('');
+
+            const gallery = document.getElementById('gallery');
+            const emptyState = document.getElementById('emptyState');
+            const activeTrips = data.trips.filter(t => !t.deleted);
+
+            if (activeTrips.length === 0) {
+                gallery.innerHTML = '';
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+                gallery.innerHTML = activeTrips.map(trip => `
+                    <div class="gallery-item" onclick="openGallery(${trip.id})">
+                        ${trip.coverPhoto ? 
+                            `<img src="${trip.coverPhoto}" alt="${trip.name}">` : 
+                            `<div class="gallery-placeholder">📸</div>`
+                        }
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <div class="gallery-title">${trip.name}</div>
+                                <div class="gallery-count">${trip.date} • ${trip.photos.length}장</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            updateTripsList();
+            updateTripSelect();
+
+            document.getElementById('inputName').value = data.profile.name;
+            document.getElementById('inputBio').value = data.profile.bio;
+            document.getElementById('inputInterests').value = data.profile.interests.join(', ');
+        }
+
+        function updateTripsList() {
+            const list = document.getElementById('tripsList');
+            list.innerHTML = data.trips.map(trip => `
+                <div class="trip-item">
+                    <div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${trip.name}</div>
+                        <div style="font-size: 12px; color: #999;">${trip.date} • ${trip.photos.length}장 ${trip.deleted ? '🗑️' : ''}</div>
+                    </div>
+                    <button class="btn secondary" style="padding: 6px 12px; margin: 0;" onclick="toggleDeleteTrip(${trip.id})">
+                        ${trip.deleted ? '복원' : '삭제'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function updateTripSelect() {
+            const select = document.getElementById('tripSelect');
+            const activeTrips = data.trips.filter(t => !t.deleted);
+            select.innerHTML = '<option value="">여행 선택</option>' +
+                activeTrips.map(trip => `<option value="${trip.id}">${trip.name}</option>`).join('');
+        }
+
+        function openGallery(tripId) {
+            const trip = data.trips.find(t => t.id === tripId);
+            if (!trip) return;
+
+            document.getElementById('modalTitle').textContent = trip.name;
+            document.getElementById('photoGrid').innerHTML = trip.photos.length === 0 ?
+                '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #999;">아직 사진이 없어요</div>' :
+                trip.photos.map(photo => `
+                    <div class="photo-item"><img src="${photo}" alt="photo"></div>
+                `).join('');
+
+            document.getElementById('galleryModal').classList.add('active');
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').classList.remove('active');
+        }
+
+        function openAdmin() {
+            document.getElementById('adminPanel').classList.add('active');
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        function resetData() {
+            if (confirm('정말 모든 데이터를 삭제하시겠습니까?')) {
+                localStorage.removeItem('portfolioData');
+                data = JSON.parse(JSON.stringify(initData));
+                saveData();
+                closeAdmin();
+                alert('모든 데이터가 삭제되었습니다.');
+            }
+        }
+
+        document.getElementById('galleryModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('galleryModal')) closeGallery();
+        });
+
+        document.getElementById('adminPanel').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('adminPanel')) closeAdmin();
+        });
+
+        render();
+    </script>
+</body>
+</html>
